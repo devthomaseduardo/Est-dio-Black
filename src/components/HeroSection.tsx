@@ -1,11 +1,11 @@
 import React, { useEffect, useRef } from "react";
 import { motion, useAnimation, useInView } from "framer-motion";
+import { Button } from "./ui/button";
 
 const HeroSection = ({
-  title = "Arte na Pele",
-  tagline = "Transformando ideias em arte única na sua pele",
-  backgroundImage = "/hero/hero3.jpg", 
-  ctaText = "Agende sua consulta",
+  title = "Estúdio Black",
+  tagline = "Arte, atitude e precisão. Um estúdio escuro, íntimo e impecável. Do primeiro risco ao último detalhe.",
+  ctaText = "Agendar agora",
   onCtaClick = () => console.log("CTA clicked"),
 }) => {
   const controls = useAnimation();
@@ -19,93 +19,174 @@ const HeroSection = ({
   }, [controls, inView]);
 
   return (
-    <section ref={ref} className="relative w-full h-screen bg-black overflow-hidden">
-      {/* Background with parallax effect */}
-      <motion.div 
-        className="absolute inset-0"
-        initial={{ scale: 1.2 }}
-        animate={{ scale: 1 }}
-        transition={{ duration: 20, repeat: Infinity, repeatType: "reverse" }}
-      >
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-black/50 to-black" />
-        <img
-          src={backgroundImage}
-          alt="Background"
-          className="w-full h-full object-cover"
-        />
-      </motion.div>
-
-      {/* Animated grain texture */}
-      <div className="absolute inset-0 opacity-50 mix-blend-overlay">
-        <div className="absolute inset-0 bg-[url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJhIiB4PSIwIiB5PSIwIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjc1IiBzdGl0Y2hUaWxlcz0ic3RpdGNoIi8+PC9maWx0ZXI+PHJlY3Qgd2lkdGg9IjMwMCIgaGVpZ2h0PSIzMDAiIGZpbHRlcj0idXJsKCNhKSIgb3BhY2l0eT0iLjA1Ii8+PC9zdmc+')] animate-grain" />
+    <section
+      ref={ref}
+      className="relative w-full overflow-hidden pt-20 sm:pt-24 min-h-[680px] md:min-h-[860px]"
+    >
+      {/* Hero clean. O fundo com imagem fica global (ParallaxBackdrop). */}
+      <div className="pointer-events-none absolute inset-0 z-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/62 to-black/86" />
+        {/* No mobile, menos vermelho para manter o hero mais limpo. */}
+        <div className="absolute inset-0 opacity-0 sm:opacity-100 bg-[radial-gradient(900px_520px_at_18%_18%,rgba(138,3,3,0.18),transparent_60%)]" />
+        <div className="absolute inset-0 opacity-70 sm:opacity-100 bg-[radial-gradient(980px_680px_at_86%_16%,rgba(255,255,255,0.06),transparent_62%)]" />
       </div>
 
-      {/* Content */}
-      <div className="relative h-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center">
-        <div className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1 }}
-          >
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-white to-gray-500 mb-6">
+      {/* Content grid */}
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 sm:gap-10 items-start lg:items-center">
+          {/* Copy */}
+          <div className="lg:col-span-7">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="inline-flex items-center gap-3 rounded-full border border-white/10 bg-white/5 px-4 py-2 text-[10px] font-bold uppercase tracking-[0.28em] text-white/80 backdrop-blur-md"
+            >
+              Estúdio Privado
+              <span className="h-1 w-1 rounded-full bg-brand-red" />
+              Sessões Exclusivas
+            </motion.div>
+
+            <motion.h1
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.05 }}
+              className="mt-6 sm:mt-8 font-display text-5xl sm:text-7xl md:text-8xl leading-[0.92] sm:leading-[0.85] tracking-tight"
+            >
               {title}
-            </h1>
-          </motion.div>
+            </motion.h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.2 }}
-            className="text-xl md:text-2xl text-gray-300 mb-8"
-          >
-            {tagline}
-          </motion.p>
+            <motion.p
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.12 }}
+              className="mt-6 sm:mt-8 text-base sm:text-lg md:text-2xl text-white/70 max-w-2xl"
+            >
+              {tagline}
+            </motion.p>
 
-          <motion.button
-            onClick={onCtaClick}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.3 }}
-            className="bg-white text-black px-8 py-4 text-lg font-medium rounded-full 
-                     hover:bg-opacity-90 transition-all duration-300
-                     shadow-[0_0_20px_rgba(255,255,255,0.3)]
-                     hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]"
-          >
-            {ctaText}
-          </motion.button>
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.18 }}
+              className="mt-8 sm:mt-10 flex flex-col sm:flex-row gap-3 sm:items-center"
+            >
+              <Button size="lg" onClick={onCtaClick} className="w-full sm:w-auto px-10">
+                {ctaText}
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                onClick={() =>
+                  document.getElementById("gallery")?.scrollIntoView({ behavior: "smooth" })
+                }
+                className="w-full sm:w-auto px-10"
+              >
+                Ver trabalhos
+              </Button>
+            </motion.div>
+
+            {/* Pilares */}
+            <div className="mt-8 sm:mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-xl">
+              {[
+                { t: "Higiene real", d: "Ambiente limpo, material esterilizado, processo sério." },
+                { t: "Mão firme", d: "Técnica e precisão, do início ao último detalhe." },
+                { t: "Resultado fotogênico", d: "Acabamento pensado para ficar forte ao vivo e na câmera." },
+              ].map((i) => (
+                <div
+                  key={i.t}
+                  className="rounded-3xl border border-white/12 bg-white/5 px-5 py-5 backdrop-blur-md shadow-[0_18px_80px_-55px_rgba(0,0,0,0.9)]"
+                >
+                  <div className="inline-flex items-center gap-2 text-[10px] font-bold uppercase tracking-[0.26em] text-white/70">
+                    <span className="h-1 w-1 rounded-full bg-brand-red" />
+                    {i.t}
+                  </div>
+                  <div className="mt-3 text-[13px] sm:text-sm leading-relaxed text-white/65">{i.d}</div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Collage */}
+          <div className="lg:col-span-5">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.9, delay: 0.08 }}
+              className="relative"
+            >
+              <div className="absolute -inset-10 bg-[radial-gradient(520px_420px_at_50%_40%,rgba(138,3,3,0.22),transparent_60%)] blur-2xl" />
+
+              <div className="grid grid-cols-12 gap-3">
+                <div className="col-span-12 sm:col-span-7">
+                  <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md">
+                    <img
+                      src="/editorial/floral-tattoo-1.png"
+                      alt="Trabalho floral"
+                      className="h-[220px] sm:h-[420px] w-full object-cover transition-transform duration-1000 ease-out hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent" />
+                  </div>
+                </div>
+
+                <div className="col-span-12 sm:col-span-5 grid gap-3">
+                  <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md">
+                    <img
+                      src="/editorial/studio-portrait-1.png"
+                      alt="Estúdio"
+                      className="h-[160px] sm:h-[204px] w-full object-cover transition-transform duration-1000 ease-out hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent" />
+                  </div>
+                  <div className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 backdrop-blur-md">
+                    <img
+                      src="/editorial/dragon-tattoo-1.png"
+                      alt="Trabalho dragão"
+                      className="h-[160px] sm:h-[204px] w-full object-cover transition-transform duration-1000 ease-out hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/65 via-transparent" />
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+
+        {/* Film strip */}
+        <div className="mt-10 sm:mt-14 pb-8 sm:pb-10">
+          <div className="flex gap-3 overflow-x-auto no-scrollbar snap-x snap-mandatory">
+            {[
+              "/editorial/artist-work-1.png",
+              "/editorial/studio-portrait-1.png",
+              "/editorial/artist-work-2.png",
+              "/editorial/dragon-tattoo-1.png",
+              "/gallery/gallery2.jpg",
+              "/gallery/gallery3.jpg",
+              "/gallery/gallery4.jpg",
+              "/gallery/gallery5.jpg",
+              "/gallery/gallery7.jpg",
+              "/gallery/gallery8.jpg",
+              "/hero/hero1.jpg",
+              "/hero/hero.jpg",
+            ].map((src) => (
+              <div
+                key={src}
+                className="snap-start min-w-[200px] sm:min-w-[260px] relative overflow-hidden rounded-3xl"
+              >
+                <div className="absolute inset-0 rounded-3xl border border-white/12 bg-white/5 backdrop-blur-md shadow-[0_26px_120px_-80px_rgba(0,0,0,0.95)]" />
+                <div className="absolute -inset-px rounded-3xl opacity-0 hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(420px_240px_at_20%_20%,rgba(138,3,3,0.22),transparent_60%),radial-gradient(420px_240px_at_80%_10%,rgba(255,255,255,0.10),transparent_60%)]" />
+                <img
+                  src={src}
+                  alt="Preview"
+                  className="relative h-[120px] sm:h-[140px] w-full object-cover transition-transform duration-\\[1400ms\\] ease-out hover:scale-[1.08]"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/5 to-transparent" />
+              </div>
+            ))}
+          </div>
         </div>
       </div>
-
-      {/* Animated decorative elements */}
-      <motion.div
-        className="absolute top-0 right-0 w-1/2 h-1/2 bg-gradient-to-b from-purple-500/20 to-transparent blur-3xl"
-        animate={{
-          scale: [1, 1.2, 1],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          repeatType: "reverse",
-        }}
-      />
-      
-      <motion.div
-        className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-to-t from-red-500/20 to-transparent blur-3xl"
-        animate={{
-          scale: [1.2, 1, 1.2],
-          opacity: [0.3, 0.5, 0.3],
-        }}
-        transition={{
-          duration: 8,
-          repeat: Infinity,
-          repeatType: "reverse",
-          delay: 4,
-        }}
-      />
     </section>
   );
 };

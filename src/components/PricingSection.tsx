@@ -20,60 +20,59 @@ interface PricingSectionProps {
 }
 
 const PricingSection = ({
-  title = "Nossos Valores",
-  subtitle = "Investimento em arte que durará para sempre",
+  title = "Sessões e Valores",
+  subtitle = "Orçamento varia por tamanho, complexidade e estilo. Chamando no WhatsApp, a gente fecha na hora.",
   plans = [
     {
       id: "basic",
-      name: "Tatuagem Pequena",
-      price: "R$150",
-      description: "Ideal para designs simples e pequenos",
+      name: "Flash",
+      price: "A partir de R$180",
+      description: "Artes prontas do estúdio. Direto, rápido e com acabamento limpo.",
       features: [
-        "Até 7cm",
-        "Preto e cinza",
-        "Consulta prévia",
-        "Garantia de retoque",
-        "Cuidados pós-tatuagem",
+        "Escolha do catálogo",
+        "Aplicação no mesmo dia (quando disponível)",
+        "Higiene e esterilização",
+        "Orientação de cuidados",
+        "Retoque conforme avaliação",
       ],
     },
     {
       id: "standard",
-      name: "Tatuagem Média",
-      price: "R$350",
-      description: "Perfeito para designs mais elaborados",
+      name: "Sessão",
+      price: "A partir de R$350",
+      description: "Sessão para projetos médios. Ideal para realismo, blackwork e fine line.",
       features: [
-        "Até 15cm",
-        "Colorido ou preto e cinza",
-        "Consulta personalizada",
-        "Garantia de retoque",
-        "Kit de cuidados pós-tatuagem",
-        "Desconto em próximas sessões",
+        "Briefing e alinhamento",
+        "Arte adaptada ao corpo",
+        "Higiene e esterilização",
+        "Orientação de cuidados",
+        "Retoque conforme avaliação",
+        "Prioridade de agenda",
       ],
       popular: true,
     },
     {
       id: "premium",
-      name: "Projeto Personalizado",
-      price: "A partir de R$600",
-      description: "Para projetos exclusivos e complexos",
+      name: "Projeto autoral",
+      price: "Sob consulta",
+      description: "Criação exclusiva. Peças grandes, composições e múltiplas sessões.",
       features: [
-        "Tamanho personalizado",
-        "Colorido ou preto e cinza",
         "Design exclusivo",
-        "Múltiplas sessões",
-        "Garantia de retoque",
-        "Kit premium de cuidados",
-        "Desconto em próximas tatuagens",
+        "Planejamento por sessões",
+        "Acompanhamento do projeto",
+        "Higiene e esterilização",
+        "Orientação de cuidados",
+        "Agenda dedicada",
       ],
     },
   ],
 }: PricingSectionProps) => {
   return (
-    <section className="py-20 px-4 md:px-8 lg:px-16 bg-zinc-950 text-white">
+    <section className="py-20 px-4 md:px-8 lg:px-16 text-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="font-display text-5xl md:text-6xl tracking-tight mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -82,7 +81,7 @@ const PricingSection = ({
             {title}
           </motion.h2>
           <motion.p
-            className="text-white max-w-2xl mx-auto"
+            className="text-white/70 max-w-2xl mx-auto text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -103,35 +102,37 @@ const PricingSection = ({
               className="h-full"
             >
               <Card
-                className={`h-full flex flex-col bg-zinc-900 border-zinc-700 ${plan.popular ? "border-red-500 relative" : ""}`}
+                className={`h-full flex flex-col relative ${plan.popular ? "ring-1 ring-brand-red/60" : ""}`}
               >
                 {plan.popular && (
-                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-red-500 text-white px-4 py-1 rounded-full text-sm font-medium">
-                    Mais Popular
+                  <div className="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-brand-red text-white px-4 py-2 rounded-full text-[10px] font-bold uppercase tracking-[0.22em] shadow-[0_16px_60px_-20px_rgba(138,3,3,0.9)]">
+                    Mais pedido
                   </div>
                 )}
                 <CardHeader className="pb-0">
-                  <h3 className="text-xl font-bold text-white">{plan.name}</h3>
+                  <h3 className="text-xl font-bold tracking-tight text-white">{plan.name}</h3>
                   <div className="mt-2">
-                    <span className="text-3xl text-red-600 font-bold">{plan.price}</span>
+                    <span className="text-4xl text-white font-bold tracking-tight">{plan.price}</span>
                   </div>
-                  <p className="text-white mt-2">{plan.description}</p>
+                  <p className="text-white/70 mt-3">{plan.description}</p>
                 </CardHeader>
                 <CardContent className="flex-grow">
                   <ul className="space-y-3 mt-4">
                     {plan.features.map((feature, index) => (
                       <li key={index} className="flex items-start">
-                        <Check className="h-5 w-5 text-green-500 mr-2 shrink-0" />
-                        <span className="text-zinc-300">{feature}</span>
+                        <Check className="h-5 w-5 text-white/80 mr-2 shrink-0" />
+                        <span className="text-white/70">{feature}</span>
                       </li>
                     ))}
                   </ul>
                 </CardContent>
                 <CardFooter>
                   <Button
-                    className={`w-full ${plan.popular ? "bg-red-600 hover:bg-red-700" : "bg-zinc-800 hover:bg-zinc-700"}`}
+                    variant={plan.popular ? "default" : "outline"}
+                    size="lg"
+                    className="w-full"
                   >
-                    Escolher Plano
+                    Agendar
                   </Button>
                 </CardFooter>
               </Card>

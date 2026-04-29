@@ -3,9 +3,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, ChevronLeft, ChevronRight, ZoomIn } from "lucide-react";
 
 const GallerySection = ({
-  title = "Nossa Galeria",
-  subtitle = "Conheça alguns dos nossos melhores trabalhos e deixe-se inspirar para sua próxima tatuagem",
+  title = "Galeria",
+  subtitle = "Flash, projetos autorais e detalhes de cicatrização. Tudo em alta definição.",
   images = [
+    "/editorial/dragon-tattoo-1.png",
+    "/editorial/artist-work-1.png",
+    "/editorial/studio-portrait-1.png",
+    "/editorial/artist-work-2.png",
     "/gallery/gallery1.jpg",
     "/gallery/gallery2.jpg", 
     "/gallery/gallery3.jpg",
@@ -13,7 +17,11 @@ const GallerySection = ({
     "/gallery/gallery5.jpg",
     "/gallery/gallery6.jpg",
     "/gallery/gallery7.jpg",
-    "/gallery/gallery8.jpg"
+    "/gallery/gallery8.jpg",
+    "/hero/hero.jpg",
+    "/hero/hero1.jpg",
+    "/hero/hero2.jpg",
+    "/hero/hero3.jpg"
   ]
 }) => {
   const [selectedImage, setSelectedImage] = useState(null);
@@ -38,14 +46,14 @@ const GallerySection = ({
   };
 
   return (
-    <section className="relative bg-black min-h-screen py-20 px-4 md:px-8">
+    <section className="relative min-h-screen py-20 px-4 md:px-8 text-white">
       {/* Header */}
       <div className="max-w-7xl mx-auto mb-16 text-center">
         <motion.h2 
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="text-4xl md:text-5xl font-bold text-white mb-6"
+          className="font-display text-5xl md:text-6xl tracking-tight text-white mb-6"
         >
           {title}
         </motion.h2>
@@ -53,7 +61,7 @@ const GallerySection = ({
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="text-zinc-400 max-w-2xl mx-auto text-lg"
+          className="text-white/70 max-w-2xl mx-auto text-lg"
         >
           {subtitle}
         </motion.p>
@@ -72,19 +80,47 @@ const GallerySection = ({
             initial={{ opacity: 0, scale: 0.8 }}
             whileInView={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.5, delay: index * 0.1 }}
-            whileHover={{ scale: 1.02 }}
-            className="relative aspect-square overflow-hidden rounded-xl cursor-pointer group"
+            whileHover={{ y: -6 }}
+            className="relative aspect-[4/5] sm:aspect-square overflow-hidden rounded-3xl cursor-pointer group"
             onClick={() => openModal(index)}
           >
+            {/* frame */}
+            <div className="absolute inset-0 rounded-3xl border border-white/12 bg-white/5 backdrop-blur-md shadow-[0_30px_140px_-80px_rgba(0,0,0,0.95)]" />
+            <div className="absolute -inset-px rounded-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-[radial-gradient(520px_300px_at_20%_20%,rgba(138,3,3,0.22),transparent_60%),radial-gradient(520px_300px_at_80%_10%,rgba(255,255,255,0.10),transparent_60%)]" />
+
             <img 
               src={image}
-              alt={`Tattoo artwork ${index + 1}`}
-              className="w-full h-full object-cover"
+              alt={`Trabalho ${index + 1}`}
+              className="relative w-full h-full object-cover transition-transform duration-\\[1400ms\\] ease-out group-hover:scale-[1.08]"
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent opacity-0 group-hover:opacity-100 transition-all duration-300">
-              <div className="absolute bottom-0 w-full p-6">
-                <div className="flex items-center justify-center">
-                  <ZoomIn className="w-8 h-8 text-white opacity-75" />
+
+            {/* editorial overlay */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent opacity-90" />
+            <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+
+            <div className="absolute left-5 right-5 top-5 flex items-center justify-between">
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/12 bg-black/35 px-3 py-2 text-[10px] font-bold uppercase tracking-[0.24em] text-white/75 backdrop-blur-md">
+                Flash
+                <span className="h-1 w-1 rounded-full bg-brand-red" />
+                Detalhe
+              </div>
+              <div className="rounded-full border border-white/12 bg-black/35 p-2 backdrop-blur-md">
+                <ZoomIn className="h-5 w-5 text-white/80" />
+              </div>
+            </div>
+
+            <div className="absolute left-5 right-5 bottom-5">
+              <div className="flex items-end justify-between gap-4">
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/55">
+                    Coleção
+                  </div>
+                  <div className="mt-2 text-lg font-semibold tracking-tight text-white/90">
+                    Trabalho {String(index + 1).padStart(2, "0")}
+                  </div>
+                </div>
+                <div className="text-[10px] font-bold uppercase tracking-[0.28em] text-white/55">
+                  Toque para ampliar
                 </div>
               </div>
             </div>
@@ -123,7 +159,7 @@ const GallerySection = ({
               transition={{ duration: 0.3 }}
               src={selectedImage}
               alt="Selected tattoo artwork"
-              className="max-h-[90vh] max-w-[90vw] object-contain rounded-lg"
+              className="max-h-[90vh] max-w-[92vw] object-contain rounded-3xl border border-white/12 bg-white/5 shadow-[0_40px_160px_-80px_rgba(0,0,0,0.95)]"
             />
 
             <button
@@ -137,8 +173,8 @@ const GallerySection = ({
       </AnimatePresence>
 
       {/* Decorative Elements */}
-      <div className="absolute top-0 left-0 w-64 h-64 bg-purple-500/10 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-0 w-64 h-64 bg-red-500/10 rounded-full blur-3xl" />
+      <div className="absolute top-0 left-0 w-64 h-64 bg-white/8 rounded-full blur-3xl" />
+      <div className="absolute bottom-0 right-0 w-64 h-64 bg-brand-red/10 rounded-full blur-3xl" />
     </section>
   );
 };

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { Pencil, Calendar, Palette, Smile } from "lucide-react";
+import { CalendarMarkIcon, InkDropIcon, NeedleIcon, RazorIcon } from "./StudioIcons";
 
 interface ProcessStep {
   icon: React.ReactNode;
@@ -16,40 +16,40 @@ interface ProcessSectionProps {
 
 const ProcessSection = ({
   title = "Como Funciona",
-  subtitle = "Conheça o processo para transformar sua ideia em arte na pele",
+  subtitle = "Direto ao ponto. Você chama, escolhe o estilo e sai com presença.",
   steps = [
     {
-      icon: <Pencil className="h-8 w-8 text-red-500" />,
-      title: "Consulta e Design",
+      icon: <NeedleIcon className="h-8 w-8 text-brand-red" />,
+      title: "Briefing e desenho",
       description:
-        "Conversamos sobre sua ideia, referências e expectativas. Nossos artistas criam um design personalizado que atenda aos seus desejos.",
+        "Você manda a ideia e o local do corpo. A gente traduz em um desenho que funciona na pele.",
     },
     {
-      icon: <Calendar className="h-8 w-8 text-red-500" />,
-      title: "Agendamento",
+      icon: <CalendarMarkIcon className="h-8 w-8 text-brand-red" />,
+      title: "Orçamento e agenda",
       description:
-        "Após aprovar o design, agendamos sua sessão em um horário conveniente. Um sinal é pago para garantir sua reserva.",
+        "Fechou no WhatsApp. Valor, data e tempo de sessão confirmados, sem enrolação.",
     },
     {
-      icon: <Palette className="h-8 w-8 text-red-500" />,
-      title: "Sessão de Tatuagem",
+      icon: <RazorIcon className="h-8 w-8 text-brand-red" />,
+      title: "Stencil e sessão",
       description:
-        "No dia agendado, realizamos sua tatuagem com os mais altos padrões de higiene e qualidade, garantindo sua segurança e conforto.",
+        "Aplicação do stencil, ajuste fino e execução. Higiene séria e traço consistente.",
     },
     {
-      icon: <Smile className="h-8 w-8 text-red-500" />,
-      title: "Cuidados e Acompanhamento",
+      icon: <InkDropIcon className="h-8 w-8 text-brand-red" />,
+      title: "Cicatrização e retoque",
       description:
-        "Fornecemos instruções detalhadas para os cuidados pós-tatuagem e oferecemos acompanhamento durante o processo de cicatrização.",
+        "Você sai com os cuidados certos. Se precisar, a gente avalia e faz o retoque.",
     },
   ],
 }: ProcessSectionProps) => {
   return (
-    <section className="py-20 px-4 md:px-8 lg:px-16 bg-zinc-950 text-white">
+    <section className="py-20 px-4 md:px-8 lg:px-16 text-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="font-display text-5xl md:text-6xl tracking-tight mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -58,7 +58,7 @@ const ProcessSection = ({
             {title}
           </motion.h2>
           <motion.p
-            className="text-zinc-400 max-w-2xl mx-auto"
+            className="text-white/70 max-w-2xl mx-auto text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -79,17 +79,17 @@ const ProcessSection = ({
               viewport={{ once: true }}
             >
               <div className="relative">
-                <div className="w-20 h-20 rounded-full bg-zinc-800 flex items-center justify-center mb-6">
+                <div className="w-20 h-20 rounded-2xl border border-white/10 bg-white/5 backdrop-blur-md flex items-center justify-center mb-6 shadow-[0_18px_70px_-42px_rgba(0,0,0,0.9)]">
                   {step.icon}
                 </div>
                 {index < steps.length - 1 && (
-                  <div className="hidden lg:block absolute top-10 left-full w-full h-0.5 bg-zinc-800 -z-10 transform -translate-x-10">
-                    <div className="absolute top-1/2 left-1/2 w-3 h-3 rounded-full bg-red-500 transform -translate-y-1/2"></div>
+                  <div className="hidden lg:block absolute top-10 left-full w-full h-px bg-white/10 -z-10 transform -translate-x-10">
+                    <div className="absolute top-1/2 left-1/2 w-2.5 h-2.5 rounded-full bg-brand-red transform -translate-y-1/2"></div>
                   </div>
                 )}
               </div>
-              <h3 className="text-xl font-bold mb-3">{step.title}</h3>
-              <p className="text-zinc-400">{step.description}</p>
+              <h3 className="text-xl font-bold tracking-tight mb-3">{step.title}</h3>
+              <p className="text-white/65">{step.description}</p>
             </motion.div>
           ))}
         </div>

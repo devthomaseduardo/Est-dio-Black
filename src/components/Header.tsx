@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Menu, X, Phone } from "lucide-react";
+import { Menu, X } from "lucide-react";
+import { Button } from "./ui/button";
+import { Link } from "react-router-dom";
+import { WhatsAppIcon } from "./StudioIcons";
 
 interface MenuItem {
   label: string;
@@ -14,16 +17,13 @@ interface HeaderProps {
 }
 
 const Header: React.FC<HeaderProps> = ({
-  logo = "Arte na Pele",
+  logo = "Estúdio Black",
   menuItems = [
-    { label: "Início", href: "#" },
-    { label: "Galeria", href: "#gallery" },
-    { label: "Processo", href: "#process" },
-    { label: "Artistas", href: "#artists" },
-    { label: "Valores", href: "#pricing" },
-    { label: "Depoimentos", href: "#testimonials" },
-    { label: "FAQ", href: "#faq" },
-    { label: "Contato", href: "#contact" },
+    { label: "Início", href: "/" },
+    { label: "Serviços", href: "/servicos" },
+    { label: "Galeria", href: "/galeria" },
+    { label: "Equipe", href: "/equipe" },
+    { label: "Contato", href: "/contato" },
   ],
   onAppointmentClick = () => console.log("Appointment button clicked"),
 }) => {
@@ -82,22 +82,39 @@ const Header: React.FC<HeaderProps> = ({
   };
 
   const AppointmentButton = ({ mobile = false }) => (
-    <button
+    <Button
       onClick={onAppointmentClick}
-      className={`
-        flex items-center justify-center gap-2 
-        ${mobile 
-          ? 'w-full bg-red-600 hover:bg-red-700 text-white mt-2' 
-          : 'bg-white text-black px-8 py-4 text-lg font-medium rounded-full hover:bg-opacity-90'}
-        transition-all duration-300
-        shadow-[0_0_20px_rgba(255,255,255,0.3)]
-        hover:shadow-[0_0_30px_rgba(255,255,255,0.5)]
-      `}
+      size={mobile ? "lg" : "default"}
+      className={mobile ? "w-full mt-2" : ""}
     >
-      <Phone className="h-4 w-4" />
-      Agendar
-    </button>
+      <WhatsAppIcon className="h-4 w-4" />
+      WhatsApp
+    </Button>
   );
+
+  const NavItem = ({ href, children }: { href: string; children: React.ReactNode }) => {
+    if (href.startsWith("/")) {
+      return (
+        <Link
+          to={href}
+          className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/60 hover:text-white transition-colors duration-200"
+          onClick={() => setMobileMenuOpen(false)}
+        >
+          {children}
+        </Link>
+      );
+    }
+
+    return (
+      <a
+        href={href}
+        className="text-[11px] font-bold uppercase tracking-[0.22em] text-white/60 hover:text-white transition-colors duration-200"
+        onClick={() => setMobileMenuOpen(false)}
+      >
+        {children}
+      </a>
+    );
+  };
 
   return (
     <motion.header
@@ -105,8 +122,8 @@ const Header: React.FC<HeaderProps> = ({
         fixed top-0 left-0 right-0 h-20 text-white z-50 
         transition-all duration-300 
         ${scrolled 
-          ? 'bg-zinc-900/95 backdrop-blur-sm shadow-lg' 
-          : 'bg-zinc-900 shadow-md'}
+          ? 'bg-black/45 backdrop-blur-md border-b border-white/10 shadow-[0_18px_70px_-35px_rgba(0,0,0,0.9)]' 
+          : 'bg-transparent'}
       `}
       initial="initial"
       animate="animate"
@@ -120,8 +137,9 @@ const Header: React.FC<HeaderProps> = ({
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
         >
-          <a href="#" className="text-2xl font-bold tracking-tight">
+          <a href="#" className="text-lg sm:text-xl font-bold tracking-tighter">
             {logo}
+            <span className="ml-2 align-middle inline-block h-1.5 w-1.5 rounded-full bg-brand-red" />
           </a>
         </motion.div>
 
@@ -134,12 +152,7 @@ const Header: React.FC<HeaderProps> = ({
                 custom={index} 
                 variants={navItemVariants}
               >
-                <a
-                  href={item.href}
-                  className="text-zinc-300 hover:text-white transition-colors duration-200"
-                >
-                  {item.label}
-                </a>
+                <NavItem href={item.href}>{item.label}</NavItem>
               </motion.li>
             ))}
           </ul>
@@ -171,7 +184,7 @@ const Header: React.FC<HeaderProps> = ({
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="md:hidden bg-zinc-800 absolute top-20 left-0 right-0 shadow-lg overflow-hidden"
+            className="md:hidden bg-black/80 backdrop-blur-md absolute top-20 left-0 right-0 shadow-lg overflow-hidden border-b border-white/10"
             variants={mobileMenuVariants}
             initial="hidden"
             animate="visible"
@@ -186,13 +199,25 @@ const Header: React.FC<HeaderProps> = ({
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.1 * index }}
                   >
-                    <a
-                      href={item.href}
-                      className="block text-zinc-300 hover:text-white transition-colors duration-200"
-                      onClick={() => setMobileMenuOpen(false)}
-                    >
-                      {item.label}
-                    </a>
+                    <div className="block">
+                      {item.href.startsWith("/") ? (
+                        <Link
+                          to={item.href}
+                          className="block text-[11px] font-bold uppercase tracking-[0.22em] text-white/70 hover:text-white transition-colors duration-200"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </Link>
+                      ) : (
+                        <a
+                          href={item.href}
+                          className="block text-[11px] font-bold uppercase tracking-[0.22em] text-white/70 hover:text-white transition-colors duration-200"
+                          onClick={() => setMobileMenuOpen(false)}
+                        >
+                          {item.label}
+                        </a>
+                      )}
+                    </div>
                   </motion.li>
                 ))}
                 <motion.li

@@ -8,7 +8,9 @@ import ProcessSection from "./ProcessSection";
 import PricingSection from "./PricingSection";
 import FAQSection from "./FAQSection";
 import AppointmentSection from "./AppointmentSection";
+import LocationSection from "./LocationSection";
 import Footer from "./Footer";
+import ParallaxBackdrop from "./ParallaxBackdrop";
 
 function Home() {
   const scrollToAppointment = () => {
@@ -19,7 +21,9 @@ function Home() {
   };
 
   return (
-    <div className="w-full min-h-screen bg-zinc-950 text-white">
+    <div className="relative w-full min-h-screen text-white studio-black-bg">
+      <ParallaxBackdrop imageSrc="/editorial/artist-work-1.png" />
+
       <Header onAppointmentClick={scrollToAppointment} />
 
       {/* Hero Section */}
@@ -53,6 +57,11 @@ function Home() {
       {/* FAQ Section */}
       <div id="faq">
         <FAQSection />
+      </div>
+
+      {/* Location Section */}
+      <div id="location">
+        <LocationSection />
       </div>
 
       {/* Appointment Section */}

@@ -20,56 +20,56 @@ interface FAQSectionProps {
 
 const FAQSection = ({
   title = "Perguntas Frequentes",
-  subtitle = "Tudo o que você precisa saber antes de fazer sua tatuagem",
+  subtitle = "Tudo o que você precisa saber antes da sua sessão.",
   faqs = [
     {
-      question: "Qual a idade mínima para fazer uma tatuagem?",
+      question: "Preciso agendar com antecedência?",
       answer:
-        "A idade mínima para fazer uma tatuagem é 18 anos. Para menores de idade, é necessário estar acompanhado dos pais ou responsáveis legais, que devem assinar um termo de autorização e apresentar documentação.",
+        "Recomendamos. O estúdio trabalha com agenda. Para encaixe, chame no WhatsApp e a gente te diz o melhor horário disponível.",
     },
     {
-      question: "Dói muito fazer uma tatuagem?",
+      question: "Vocês fazem tatuagem colorida e preta e cinza?",
       answer:
-        "A dor é relativa e varia de pessoa para pessoa. Algumas áreas do corpo são mais sensíveis que outras. Nossos profissionais trabalham para minimizar o desconforto e podem aplicar anestésicos tópicos quando necessário.",
+        "Sim. Trabalhamos com estilos diferentes. O ideal é você mandar referências para a gente alinhar o que combina com sua pele e com o estilo da arte.",
     },
     {
-      question: "Quanto tempo leva para cicatrizar?",
+      question: "Quanto tempo dura uma sessão?",
       answer:
-        "O processo de cicatrização superficial leva em média de 15 a 30 dias, mas a cicatrização completa pode levar até 3 meses. Durante este período, é importante seguir todas as recomendações de cuidados pós-tatuagem.",
+        "Depende do tamanho e da complexidade. Flash costuma ser mais rápido. Projetos autorais podem exigir mais de uma sessão.",
     },
     {
-      question: "Posso tomar sol após fazer uma tatuagem?",
+      question: "Quais formas de pagamento vocês aceitam?",
       answer:
-        "Não é recomendado expor a tatuagem ao sol durante o processo de cicatrização. Após cicatrizada, sempre use protetor solar com FPS alto para preservar as cores e os detalhes da sua tatuagem.",
+        "Aceitamos dinheiro, PIX, cartão de crédito e débito. Para projetos maiores, combinamos sinal e datas das sessões.",
     },
     {
-      question: "Como é feito o pagamento?",
+      question: "E se eu me atrasar ou precisar remarcar?",
       answer:
-        "Aceitamos dinheiro, PIX, cartões de crédito e débito. Para projetos maiores, trabalhamos com um sistema de sinal (30% do valor) no agendamento e o restante no dia da sessão.",
+        "Avise assim que souber. Dependendo do atraso, pode reduzir o tempo da sessão ou exigir remarcação para manter a qualidade do trabalho.",
     },
     {
-      question: "Vocês fazem cobertura de tatuagens antigas?",
+      question: "Vocês fazem retoque?",
       answer:
-        "Sim, realizamos coberturas de tatuagens antigas ou mal executadas. Este tipo de trabalho requer uma consulta prévia para avaliarmos a viabilidade e planejarmos o melhor design para a cobertura.",
+        "Sim. Quando necessário, avaliamos caso a caso. O objetivo é manter o trabalho firme e bem cicatrizado.",
     },
     {
-      question: "Preciso marcar horário com antecedência?",
+      question: "Como escolher o estilo ideal?",
       answer:
-        "Sim, recomendamos agendar sua sessão com antecedência. Para consultas e orçamentos, você pode nos visitar sem agendamento durante nosso horário comercial ou utilizar nosso formulário de contato online.",
+        "Mande referências e diga o local do corpo. A gente orienta pelo tamanho, anatomia e estilo do seu projeto.",
     },
     {
-      question: "Quais cuidados devo ter após a tatuagem?",
+      question: "Posso levar referência em foto?",
       answer:
-        "Após a tatuagem, você receberá instruções detalhadas sobre os cuidados necessários. Em geral, é importante manter a área limpa, evitar exposição ao sol, piscinas e mar, não coçar e aplicar o hidratante recomendado pelo tatuador.",
+        "Sim. Referências ajudam muito. A gente adapta para o seu corpo e cria uma versão que funcione como tatuagem.",
     },
   ],
 }: FAQSectionProps) => {
   return (
-    <section className="py-20 px-4 md:px-8 lg:px-16 bg-zinc-900 text-white">
+    <section className="py-20 px-4 md:px-8 lg:px-16 text-white">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-12">
           <motion.h2
-            className="text-3xl md:text-4xl font-bold mb-4"
+            className="font-display text-5xl md:text-6xl tracking-tight mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -78,7 +78,7 @@ const FAQSection = ({
             {title}
           </motion.h2>
           <motion.p
-            className="text-zinc-400 max-w-2xl mx-auto"
+            className="text-white/70 max-w-2xl mx-auto text-lg"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -99,12 +99,12 @@ const FAQSection = ({
             >
               <AccordionItem
                 value={`item-${index}`}
-                className="border-zinc-700"
+                className="border-white/10"
               >
-                <AccordionTrigger className="text-left text-white hover:text-zinc-300">
+                <AccordionTrigger className="text-left text-white hover:text-white/80">
                   {faq.question}
                 </AccordionTrigger>
-                <AccordionContent className="text-zinc-300">
+                <AccordionContent className="text-white/70">
                   {faq.answer}
                 </AccordionContent>
               </AccordionItem>

@@ -43,7 +43,6 @@ const ImageModal = ({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogContent
         className="max-w-4xl w-full bg-black p-0 border-none"
-        closeButtonProps={{ className: "hidden" }}
       >
         <div className="relative w-full h-[700px] bg-black flex items-center justify-center">
           {/* Close button */}

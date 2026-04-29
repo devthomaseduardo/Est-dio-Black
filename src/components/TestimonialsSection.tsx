@@ -24,7 +24,7 @@ const TestimonialsSection = ({
       photo:
         "https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=150&auto=format&fit=crop",
       rating: 5,
-      text: "Minha experiência no Arte na Pele foi incrível! A tatuadora entendeu perfeitamente o que eu queria e o resultado superou minhas expectativas. Ambiente limpo e acolhedor.",
+      text: "Minha experiência no Estúdio Black foi incrível. A artista entendeu exatamente o que eu queria e o resultado ficou muito acima do esperado. Ambiente limpo e seguro.",
       tattooType: "Realismo",
     },
     {
@@ -40,7 +40,7 @@ const TestimonialsSection = ({
       photo:
         "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?q=80&w=150&auto=format&fit=crop",
       rating: 5,
-      text: "Já fiz várias tatuagens em diferentes estúdios, mas o Arte na Pele é sem dúvida o melhor. Profissionalismo, higiene e talento incomparáveis.",
+      text: "Já fiz tatuagens em outros lugares, mas o Estúdio Black é o mais profissional. Higiene impecável e traço firme.",
       tattooType: "Blackwork",
     },
     {
@@ -52,8 +52,8 @@ const TestimonialsSection = ({
       tattooType: "Minimalista",
     },
   ],
-  title = "O que nossos clientes dizem",
-  subtitle = "Experiências reais de quem confiou sua pele à nossa arte",
+  title = "O que os clientes dizem",
+  subtitle = "Experiências reais de quem confiou sua pele à nossa arte.",
 }) => {
   // Function to render stars based on rating
   const renderRating = (rating: number) => {
@@ -85,11 +85,11 @@ const TestimonialsSection = ({
   };
 
   return (
-    <section className="w-full py-16 px-4 md:px-8 bg-zinc-900 text-white">
+    <section className="w-full py-20 px-4 md:px-8 text-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold mb-4">{title}</h2>
-          <p className="text-white max-w-2xl mx-auto">{subtitle}</p>
+          <h2 className="font-display text-5xl md:text-6xl tracking-tight mb-4">{title}</h2>
+          <p className="text-white/70 max-w-2xl mx-auto text-lg">{subtitle}</p>
         </div>
 
         <Carousel
@@ -102,7 +102,7 @@ const TestimonialsSection = ({
           <CarouselContent>
             {testimonials.map((testimonial, index) => (
               <CarouselItem key={index} className="md:basis-1/2 lg:basis-1/3">
-                <Card className="bg-zinc-800 border-zinc-700 h-full">
+                <Card className="h-full">
                   <CardContent className="p-6">
                     <div className="flex items-center mb-4">
                       <div className="w-12 h-12 rounded-full overflow-hidden mr-4">
@@ -118,16 +118,18 @@ const TestimonialsSection = ({
                         </h3>
                         <div className="flex items-center">
                           {renderRating(testimonial.rating)}
-                          <span className="ml-2 text-sm text-white">
+                          <span className="ml-2 text-sm text-white/70">
                             {testimonial.rating.toFixed(1)}
                           </span>
                         </div>
                       </div>
                     </div>
-                    <p className="text-white mb-4">"{testimonial.text}"</p>
+                    <p className="text-white/75 mb-4 leading-relaxed">"{testimonial.text}"</p>
                     <div className="mt-auto">
-                      <span className="inline-block px-3 py-1 text-white  bg-red-800 rounded-full text-xs">
-                        Estilo: {testimonial.tattooType}
+                      <span className="inline-flex items-center gap-2 px-3 py-2 text-white/80 bg-white/5 border border-white/10 rounded-full text-[10px] font-bold uppercase tracking-[0.22em]">
+                        Estilo
+                        <span className="h-1 w-1 rounded-full bg-brand-red" />
+                        {testimonial.tattooType}
                       </span>
                     </div>
                   </CardContent>

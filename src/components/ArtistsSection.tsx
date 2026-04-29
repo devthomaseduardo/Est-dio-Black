@@ -29,32 +29,32 @@ const ArtistCard = ({
   bio,
 }: Omit<Artist, "id">) => {
   return (
-    <div className="bg-zinc-900 rounded-xl overflow-hidden shadow-xl w-full sm:max-w-[280px] md:max-w-[320px] lg:max-w-[350px] flex flex-col">
+    <div className="rounded-2xl overflow-hidden w-full sm:max-w-[280px] md:max-w-[320px] lg:max-w-[350px] flex flex-col border border-white/10 bg-white/5 backdrop-blur-md shadow-[0_24px_100px_-55px_rgba(0,0,0,0.9)]">
       {/* Imagem do artista com altura responsiva */}
       <div className="full  sm:h-80 md:h-96 overflow-hidden">
         <img 
           src={photo} 
           alt={`Artista ${name}`} 
-          className="w-full h-full object-cover object-center" 
+          className="w-full h-full object-cover object-center transition-transform duration-1000 ease-out hover:scale-105" 
         />
       </div>
       <div className="p-4 sm:p-6 flex-1">
-        <h3 className="text-lg sm:text-xl font-bold mb-2">{name}</h3>
-        <p className="text-zinc-400 text-xs sm:text-sm mb-2 sm:mb-3">Experiência: {experience}</p>
+        <h3 className="text-lg sm:text-xl font-bold tracking-tight mb-2">{name}</h3>
+        <p className="text-white/60 text-xs sm:text-sm mb-2 sm:mb-3">Experiência: {experience}</p>
         <div className="flex flex-wrap gap-1 sm:gap-2 mb-3 sm:mb-4">
           {specialties.map((specialty, index) => (
             <span
               key={index}
-              className="bg-zinc-800 text-xs text-zinc-300 px-2 py-1 rounded-full"
+              className="bg-white/5 border border-white/10 text-[10px] font-bold uppercase tracking-[0.20em] text-white/70 px-3 py-2 rounded-full"
             >
               {specialty}
             </span>
           ))}
         </div>
-        <p className="text-zinc-400 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3">{bio}</p>
+        <p className="text-white/65 text-xs sm:text-sm mb-3 sm:mb-4 line-clamp-3">{bio}</p>
         <Button 
           variant="outline" 
-          className="w-full border-red-600 bg-red-600 text-white hover:bg-red-700 hover:border-red-700 transition-colors"
+          className="w-full"
         >
           Ver perfil
         </Button>
@@ -65,13 +65,13 @@ const ArtistCard = ({
 
 const ArtistsSection = ({
   title = "Nossos Artistas",
-  subtitle = "Conheça os talentosos profissionais que transformarão suas ideias em arte na pele",
+  subtitle = "Estilo, técnica e assinatura. Cada traço com intenção.",
   artists = [
     {
       id: "1",
       name: "Maria Silva",
       photo:
-        "/public/tatto/Maria Silva-artista.jpg",
+        "/tatto/Maria Silva-artista.jpg",
       specialties: ["Realismo", "Blackwork", "Aquarela"],
       experience: "8 anos",
       sampleWorks: [
@@ -86,7 +86,7 @@ const ArtistsSection = ({
       name: "Carlos Mendes",
       photo:
         "/tatto/Carlos Mendes-artista.jpg",
-      specialties: ["Old School", "Tribal", "Geométrico"],
+      specialties: ["Old School", "Tradicional", "Geométrico"],
       experience: "12 anos",
       sampleWorks: [
         "/gallery/gallery1.jpg",
@@ -101,7 +101,7 @@ const ArtistsSection = ({
       name: "Ana Oliveira",
       photo:
         "/tatto/Ana Oliveira-artista.jpg",
-      specialties: ["Minimalista", "Fineline", "Pontilhismo"],
+      specialties: ["Fine line", "Minimalista", "Pontilhismo"],
       experience: "5 anos",
       sampleWorks: [
         "/gallery/gallery1.jpg",
@@ -116,7 +116,7 @@ const ArtistsSection = ({
       name: "Rafael Costa",
       photo:
         "/tatto/Rafael Costa-artista.jpeg",
-      specialties: ["Oriental", "Colorido", "Cover-up"],
+      specialties: ["Oriental", "Colorido", "Cover up"],
       experience: "10 anos",
       sampleWorks: [
         "/gallery/gallery1.jpg",
@@ -180,11 +180,11 @@ const ArtistsSection = ({
   };
 
   return (
-    <section className="py-12 sm:py-16 md:py-20 px-4 md:px-8 lg:px-16 bg-zinc-950 text-white">
+    <section className="py-12 sm:py-16 md:py-20 px-4 md:px-8 lg:px-16 text-white">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-8 sm:mb-12">
           <motion.h2
-            className="text-2xl sm:text-3xl md:text-4xl font-bold mb-3 sm:mb-4"
+            className="font-display text-5xl sm:text-6xl md:text-7xl tracking-tight mb-3 sm:mb-4"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
@@ -193,7 +193,7 @@ const ArtistsSection = ({
             {title}
           </motion.h2>
           <motion.p
-            className="text-zinc-400 text-sm sm:text-base max-w-2xl mx-auto"
+            className="text-white/70 text-sm sm:text-base max-w-2xl mx-auto"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
@@ -209,7 +209,7 @@ const ArtistsSection = ({
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-zinc-800/50 text-white hover:bg-zinc-700"
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10"
               onClick={handlePrevious}
               disabled={currentIndex === 0}
             >
@@ -221,7 +221,7 @@ const ArtistsSection = ({
             <Button
               variant="ghost"
               size="icon"
-              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-zinc-800/50 text-white hover:bg-zinc-700"
+              className="h-10 w-10 sm:h-12 sm:w-12 rounded-full bg-white/5 border border-white/10 text-white hover:bg-white/10"
               onClick={handleNext}
               disabled={currentIndex >= maxIndex}
             >
@@ -287,7 +287,7 @@ const ArtistsSection = ({
           {Array.from({ length: artists.length - (isMobile ? 0 : cardsToShow - 1) }).map((_, index) => (
             <button
               key={index}
-              className={`h-2 w-2 mx-1 rounded-full ${currentIndex === index ? "bg-red-600" : "bg-zinc-700"}`}
+              className={`h-2 w-2 mx-1 rounded-full ${currentIndex === index ? "bg-brand-red" : "bg-white/20"}`}
               onClick={() => setCurrentIndex(index)}
               aria-label={`Go to artist group ${index + 1}`}
             />
