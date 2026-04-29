@@ -1,16 +1,18 @@
-import { Suspense } from "react";
-import { useRoutes, Routes, Route } from "react-router-dom";
-import Home from "./components/home";
-import routes from "tempo-routes";
-import ServicosPage from "@/pages/ServicosPage";
-import GaleriaPage from "@/pages/GaleriaPage";
-import EquipePage from "@/pages/EquipePage";
-import ContatoPage from "@/pages/ContatoPage";
+import { Suspense, lazy } from "react";
+import { Routes, Route } from "react-router-dom";
+import ScrollToTop from "@/components/ScrollToTop";
+
+const Home = lazy(() => import("./components/home"));
+const ServicosPage = lazy(() => import("@/pages/ServicosPage"));
+const GaleriaPage = lazy(() => import("@/pages/GaleriaPage"));
+const EquipePage = lazy(() => import("@/pages/EquipePage"));
+const ContatoPage = lazy(() => import("@/pages/ContatoPage"));
 
 function App() {
   return (
     <Suspense fallback={<p>Loading...</p>}>
       <>
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/servicos" element={<ServicosPage />} />
@@ -18,7 +20,6 @@ function App() {
           <Route path="/equipe" element={<EquipePage />} />
           <Route path="/contato" element={<ContatoPage />} />
         </Routes>
-        {import.meta.env.VITE_TEMPO === "true" && useRoutes(routes)}
       </>
     </Suspense>
   );
